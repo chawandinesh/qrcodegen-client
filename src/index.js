@@ -5,9 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AppRoutes from "./appRoutes/AppRoutes";
 import { Context } from "./context/context";
+import { Helmet } from "react-helmet";
 
 ReactDOM.render(
   <Context>
+    <Helmet>
+      <meta title="Sample Feedback Form"></meta>
+      <meta name="description" content="getting description name "></meta>
+    </Helmet>
     <AppRoutes />
   </Context>,
   document.getElementById("root")
