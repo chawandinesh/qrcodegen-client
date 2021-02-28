@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 function About() {
   const history = useHistory();
   React.useEffect(() => {
-    localStorage.setItem("header", "2")
+    window.localStorage.setItem("header", "2")
   }, [])
   return (
     <div>

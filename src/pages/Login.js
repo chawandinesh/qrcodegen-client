@@ -33,7 +33,7 @@ const Login = () => {
         return res.data;
       })
       .then((result) => {
-        localStorage.setItem("token", result.token);
+        window.localStorage.setItem("token", result.token);
       })
       .catch((err) => {
         console.log(err);

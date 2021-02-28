@@ -29,7 +29,7 @@ function StripeCheckoutComponent(props) {
     const body = {
       token,
       product,
-      authorization: localStorage.getItem("token"),
+      authorization: window.localStorage.getItem("token"),
       address: props.address,
     };
     const headers = {

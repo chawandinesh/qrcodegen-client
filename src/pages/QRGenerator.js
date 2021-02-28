@@ -191,7 +191,7 @@ export default function QRGenerator() {
       id: id,
     });
 
-    localStorage.setItem("header", "3");
+    window.localStorage.setItem("header", "3");
   };
   return (
     <div
