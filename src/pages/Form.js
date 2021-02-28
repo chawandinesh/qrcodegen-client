@@ -183,7 +183,7 @@ const FormReg = (props) => {
           </div>
         </div>
       </Form.Item>
-      <button onClick={getReq}>getReq</button>
+  
 
       <Form.Item label="Name" style={{ marginBottom: 0 }}>
         <Form.Item
