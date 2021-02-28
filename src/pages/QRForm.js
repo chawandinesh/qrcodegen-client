@@ -35,15 +35,10 @@ const QRForm = (props) => {
   const handleSubmitStatus = () => {
     setStatusSubmit(true);
   };
-
-  console.log(image);
   const handleImageChange = (e) => {
     var file = e.target.files[0];
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
-    console.log(reader);
-
-    console.log(reader.result);
     reader.onloadend = function (e) {
       setImage(reader.result);
     };

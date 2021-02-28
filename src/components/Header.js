@@ -9,10 +9,7 @@ const { Header, Content, Footer } = Layout;
 
 const HeaderComponent = () => {
   const { state, setState } = React.useContext(QRContext);
-  const [current, setCurrent] = React.useState(1);
-  // console.log(state.generatedCodes.length, 'state...')
   const handleClick = (e) => {
-    console.log(e.key);
     setState({ ...state, current: e.key });
     window.localStorage.setItem("header", e.key);
   };

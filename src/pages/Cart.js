@@ -9,12 +9,13 @@ function Cart() {
   const { state, setState } = React.useContext(QRContext);
   const [count, setCount] = React.useState(0);
   const [paymentStatus, setPaymentStatus] = React.useState("");
+  const [paymentInfo, setPaymentInfo] = React.useState(undefined);
   const sum =
     Array.isArray(state.generatedCodes) &&
     state.generatedCodes.length &&
     state.generatedCodes.reduce((r, a) => r + a.price * a.quantity, 0);
 
-  console.log(state);
+  console.log(state, "context state");
   const handleItemCountChange = (item, idx) => {
     setCount(item);
     state.generatedCodes[idx].quantity = item;
@@ -25,9 +26,12 @@ function Cart() {
       ? state.generatedCodes.map((e) => ({ id: e.id, quantity: e.quantity }))
       : [];
 
-  const getPaymentStatus = (e) => {
+  const getPaymentStatus = (e, result) => {
     setPaymentStatus(e);
+    setPaymentInfo(result);
   };
+
+  // console.log(paymentInfo, "paymentInfo");
 
   const CartDesciption = () => {
     return (
@@ -63,8 +67,6 @@ function Cart() {
             <h4>Action</h4>
           </div>
         </div>
-
-        {/* abcd */}
 
         {state.generatedCodes.map((e, idx) => {
           return (
@@ -370,7 +372,7 @@ function Cart() {
           <div>
             <h1>Payment</h1>
             {/* <div style={{width: '100vw', height: '100vh', margin:"0 auto"}}> */}
-            {paymentStatus === 200 ? (
+            {paymentStatus === 200 && paymentInfo ? (
               <div
                 style={{
                   width: "50vw",
@@ -378,12 +380,20 @@ function Cart() {
                   height: "40vh",
                   alignItems: "center",
                   justifyContent: "center",
+                  flexDirection:'column',
                   display: "flex",
                   background: "#fff",
                   margin: "0 auto",
                 }}
               >
-                <h1 style={{ color: "green" }}>Payment Success</h1>
+                <h2 style={{ color: "green" }}>Payment Success</h2>
+                <h1 style={{ fontWeight: "bold" }}>
+                  {paymentInfo.data.amount}
+                </h1>
+                <h2 style={{ color: "#aaa" }}>
+                  {paymentInfo.data.balance_transaction}
+                </h2>
+                <a target="_blank" href={`${paymentInfo.data.receipt_url}`}>Download Recept</a>
               </div>
             ) : null}
 

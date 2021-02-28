@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import {
   Form,
   Input,
@@ -91,7 +92,6 @@ const FormReg = (props) => {
   };
 
   const onFinish = (values) => {
-    // console.log("Received values of form: ", values);
     props.getSubmitStatus(values);
   };
 
@@ -113,9 +113,6 @@ const FormReg = (props) => {
     var file = e.target.files[0];
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
-    console.log(reader);
-
-    console.log(reader.result);
     reader.onloadend = function (e) {
       setImage(reader.result);
     };
@@ -134,6 +131,17 @@ const FormReg = (props) => {
     label: website,
     value: website,
   }));
+
+  const getReq = async () => {
+    await axios
+      .get("http://localhost:8088/")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Form
       {...formItemLayout}
@@ -175,6 +183,7 @@ const FormReg = (props) => {
           </div>
         </div>
       </Form.Item>
+      <button onClick={getReq}>getReq</button>
 
       <Form.Item label="Name" style={{ marginBottom: 0 }}>
         <Form.Item

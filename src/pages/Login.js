@@ -20,7 +20,6 @@ const Login = () => {
   const history = useHistory();
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
     const headers = {
       "Content-Type": "application/json",
     };

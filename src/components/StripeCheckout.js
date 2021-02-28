@@ -8,19 +8,17 @@ function StripeCheckoutComponent(props) {
   const [product, setProduct] = React.useState({
     name: "Qrcode",
     price: 0,
-    productData: [],
+    productData: {item:[], charges:{}},
     productBy: "sQR pvt ltd",
   });
-  console.log(props);
 
   React.useEffect(() => {
     setProduct({
       ...product,
       price: props.sum,
-      productData: props.productData,
+      productData: {...product.productData, item:props.productData},
     });
   }, [props]);
-  console.log(props, product);
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
@@ -44,15 +42,17 @@ function StripeCheckoutComponent(props) {
       data: body,
     })
       .then((response) => {
-        console.log("response", response);
-        // console.log(response.data)
+        console.log(response,'response')
         if (response.status === 200) {
+          // setProduct({
+          //   ...product, productData:{...product.productData, charges: response.data.data}
+          // })
           setState({
             ...state,
             status: 2,
-            ordered: [...state.ordered, product.productData],
+            ordered: [...state.ordered,{...product.productData,charges: response.data }],
           });
-          props.getPaymentStatus(response.status);
+          props.getPaymentStatus(response.status, response.data);
           openNotificationWithIcon("success");
         }
       })

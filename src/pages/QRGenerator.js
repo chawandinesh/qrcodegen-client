@@ -10,9 +10,7 @@ import FormReg from "./Form";
 import { QRContext } from "../context/context";
 
 export default function QRGenerator() {
-  const [text, setText] = React.useState("");
   const [data, setData] = React.useState("");
-  const [cartCount, setCartCount] = React.useState(1);
   const { state, setState } = React.useContext(QRContext);
   const [qrcolor, setQrcolor] = React.useState("#000");
   const [option, setOption] = React.useState({
@@ -20,15 +18,12 @@ export default function QRGenerator() {
     label: "Small",
   });
   const [checked, setChecked] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
-  //   const LazyLoad = React.lazy(() => import("../charts/SimpleLineChart"));
 
   React.useEffect(() => {
     window.localStorage.setItem("header", "1");
   }, []);
   const handleSubmitStatus = (status) => {
-    console.log(status, JSON.stringify(status));
     setData(JSON.stringify(status));
   };
 
@@ -162,7 +157,7 @@ export default function QRGenerator() {
   const downloadQR = (e) => {
     // const canvas = document.getElementsByTagName("canvas");
     const canvas = document.getElementById(e).childNodes;
-    console.log(canvas, "canvas");
+    // console.log(canvas, "canvas");
     const pngUrl = canvas[0]
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
@@ -173,7 +168,7 @@ export default function QRGenerator() {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
-  console.log(state, "stat...");
+  console.log(state, "context qrgen stat...");
 
   const handleCartAdd = () => {
     let id = Math.random().toString(36).substring(7);
