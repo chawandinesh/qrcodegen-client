@@ -6,8 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import AppRoutes from "./appRoutes/AppRoutes";
 import { Context } from "./context/context";
 import { Helmet } from "react-helmet";
+import {render} from 'react-snapshot'
 
-ReactDOM.render(
+render(
   <Context>
     <Helmet>
       <meta title="Sample Feedback Form"></meta>
