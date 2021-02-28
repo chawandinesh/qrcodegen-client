@@ -46,8 +46,7 @@ const HeaderComponent = () => {
         theme="dark"
         onClick={handleClick}
         // key="1"
-        selectedKeys={'1'}
-        // selectedKeys={window.localStorage.getItem("header")}
+        selectedKeys={window.localStorage.getItem("header")}
         mode="horizontal"
         // defaultSelectedKeys={["2"]}
         style={{ lineHeight: "64px", fontSize: "20px" }}
