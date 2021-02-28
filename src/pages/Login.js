@@ -25,7 +25,7 @@ const Login = () => {
     };
     await axios({
       method: "post",
-      url: `${REACT_APP_SERVER}/login`,
+      url: `${process.env.REACT_APP_SERVER}/login`,
       headers,
       data: values,
     })
