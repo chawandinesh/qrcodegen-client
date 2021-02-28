@@ -36,7 +36,7 @@ function StripeCheckoutComponent(props) {
       "Content-Type": "application/json",
     };
     return await axios({
-      url: "/payment",
+      url: `${REACT_APP_SERVER}/payment`,
       method: "post",
       headers,
       data: body,

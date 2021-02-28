@@ -134,7 +134,7 @@ const FormReg = (props) => {
 
   const getReq = async () => {
     await axios
-      .get("http://localhost:8088/")
+      .get(`${process.env.REACT_APP_SERVER}`)
       .then((res) => {
         console.log(res);
       })
