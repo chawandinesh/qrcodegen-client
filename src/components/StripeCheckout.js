@@ -8,7 +8,7 @@ function StripeCheckoutComponent(props) {
   const [product, setProduct] = React.useState({
     name: "Qrcode",
     price: 0,
-    productData: {item:[], charges:{}},
+    productData: { item: [], charges: {} },
     productBy: "sQR pvt ltd",
   });
 
@@ -16,14 +16,20 @@ function StripeCheckoutComponent(props) {
     setProduct({
       ...product,
       price: props.sum,
-      productData: {...product.productData, item:props.productData},
+      productData: { ...product.productData, item: props.productData },
     });
   }, [props]);
 
   const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: "Payment Success",
-    });
+    if (type === "error") {
+      notification[type]({
+        message: `Payment ${type}, Please Login`,
+      });
+    } else {
+      notification[type]({
+        message: `Payment ${type}`,
+      });
+    }
   };
   const makePayment = async (token) => {
     const body = {
@@ -42,7 +48,7 @@ function StripeCheckoutComponent(props) {
       data: body,
     })
       .then((response) => {
-        console.log(response,'response')
+        console.log(response, "response");
         if (response.status === 200) {
           // setProduct({
           //   ...product, productData:{...product.productData, charges: response.data.data}
@@ -50,14 +56,20 @@ function StripeCheckoutComponent(props) {
           setState({
             ...state,
             status: 2,
-            ordered: [...state.ordered,{...product.productData,charges: response.data }],
+            ordered: [
+              ...state.ordered,
+              { ...product.productData, charges: response.data },
+            ],
           });
           props.getPaymentStatus(response.status, response.data);
           openNotificationWithIcon("success");
+        } else {
+          openNotificationWithIcon("error");
         }
       })
       .catch((err) => {
         console.log(err, "err");
+        openNotificationWithIcon("error");
       });
   };
   return (
@@ -70,5 +82,5 @@ function StripeCheckoutComponent(props) {
     />
   );
 }
- 
+
 export default StripeCheckoutComponent;

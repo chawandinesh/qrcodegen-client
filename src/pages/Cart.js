@@ -27,6 +27,7 @@ function Cart() {
       : [];
 
   const getPaymentStatus = (e, result) => {
+    console.log(e, result, "result info");
     setPaymentStatus(e);
     setPaymentInfo(result);
   };
@@ -106,7 +107,6 @@ function Cart() {
                 <InputNumber
                   min={1}
                   max={10}
-                  defaultValue={0}
                   value={state.generatedCodes[idx].quantity}
                   onChange={(item) => {
                     handleItemCountChange(item, idx);
@@ -370,8 +370,30 @@ function Cart() {
       case 2:
         return (
           <div>
-            <h1>Payment</h1>
-            {/* <div style={{width: '100vw', height: '100vh', margin:"0 auto"}}> */}
+            <h1>Payment Info</h1>
+            {paymentStatus === 403 ? (
+              <div
+                style={{
+                  width: "50vw",
+                  borderRadius: "10px",
+                  height: "40vh",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  display: "flex",
+                  background: "#fff",
+                  margin: "0 auto",
+                }}
+              >
+                <h2 style={{ color: "red" }}>Payment Failed</h2>
+                <h1 style={{ fontWeight: "bold" }}>
+                  Unautherized Payment Access
+                </h1>
+                <h2 style={{ color: "#aaa" }}>Please login to pay</h2>
+              </div>
+            ) : (
+              <React.Fragment />
+            )}
             {paymentStatus === 200 && paymentInfo ? (
               <div
                 style={{
@@ -380,7 +402,7 @@ function Cart() {
                   height: "40vh",
                   alignItems: "center",
                   justifyContent: "center",
-                  flexDirection:'column',
+                  flexDirection: "column",
                   display: "flex",
                   background: "#fff",
                   margin: "0 auto",
@@ -393,7 +415,9 @@ function Cart() {
                 <h2 style={{ color: "#aaa" }}>
                   {paymentInfo.data.balance_transaction}
                 </h2>
-                <a target="_blank" href={`${paymentInfo.data.receipt_url}`}>Download Recept</a>
+                <a target="_blank" href={`${paymentInfo.data.receipt_url}`}>
+                  Download Recept
+                </a>
               </div>
             ) : null}
 
