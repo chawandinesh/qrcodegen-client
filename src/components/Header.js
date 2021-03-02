@@ -19,6 +19,8 @@ const HeaderComponent = () => {
         position: "fixed",
         zIndex: 10,
         width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
       }}
     >
       <div
@@ -46,7 +48,7 @@ const HeaderComponent = () => {
         theme="dark"
         onClick={handleClick}
         // key="1"
-        selectedKeys={'1'}
+        // selectedKeys={'1'}
         // selectedKeys={window.localStorage.getItem("header")}
         mode="horizontal"
         // defaultSelectedKeys={["2"]}
@@ -58,12 +60,12 @@ const HeaderComponent = () => {
         <Menu.Item key="2">
           <Link to="/about">About</Link>
         </Menu.Item>
-        <Menu.Item key="4" style={{ float: "right" }}>
+        <Menu.Item key="4">
           <Link to="/login" style={{ paddingRight: "10px" }}>
             Login
           </Link>
         </Menu.Item>
-        <Menu.Item key="3" style={{ float: "right" }}>
+        <Menu.Item key="3">
           <Link to="/cart">
             <ShoppingCartOutlined />
             Cart( {state.generatedCodes.length} )
