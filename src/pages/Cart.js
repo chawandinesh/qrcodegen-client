@@ -163,9 +163,7 @@ function Cart() {
             <h4></h4>
           </div>
           <div>
-            <button onClick={() => setState({ ...state, status: 1 })}>
-              Go to address
-            </button>
+            <h4></h4>
           </div>
           <div>
             <h4 style={{ color: "gray" }}>Total</h4>
